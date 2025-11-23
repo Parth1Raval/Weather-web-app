@@ -8,7 +8,13 @@ const app = express();
 
 // Enable CORS for frontend
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5000'],
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'http://localhost:5000',
+    'https://parth-weather-backend.vercel.app',
+    /\.vercel\.app$/  // Allow all Vercel deployments
+  ],
   credentials: true
 }));
 
