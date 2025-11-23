@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
 
 const WeatherComparison = ({ weatherData }) => {
-  if (!weatherData) return null;
-
   const [comparison, setComparison] = useState(null);
 
   useEffect(() => {
+    if (!weatherData) return;
     // Get yesterday's data from localStorage
     const yesterday = localStorage.getItem('yesterdayWeather');
     if (yesterday) {
@@ -21,6 +20,8 @@ const WeatherComparison = ({ weatherData }) => {
       date: new Date().toDateString()
     }));
   }, [weatherData]);
+
+  if (!weatherData) return null;
 
   const getChange = (current, previous) => {
     if (!previous) return null;

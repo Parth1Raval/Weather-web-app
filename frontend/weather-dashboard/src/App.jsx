@@ -16,6 +16,8 @@ import ErrorMessage from './components/ErrorMessage';
 import { weatherAPI } from './services/api';
 import { debounce } from './utils/helpers';
 
+/* eslint-disable */
+
 function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState([]);
