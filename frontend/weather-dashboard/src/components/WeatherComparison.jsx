@@ -6,6 +6,7 @@ const WeatherComparison = ({ weatherData }) => {
 
   useEffect(() => {
     if (!weatherData) return;
+    
     // Get yesterday's data from localStorage
     const yesterday = localStorage.getItem('yesterdayWeather');
     if (yesterday) {
@@ -21,8 +22,6 @@ const WeatherComparison = ({ weatherData }) => {
     }));
   }, [weatherData]);
 
-  if (!weatherData) return null;
-
   const getChange = (current, previous) => {
     if (!previous) return null;
     const diff = current - previous;
@@ -32,6 +31,20 @@ const WeatherComparison = ({ weatherData }) => {
       percentage: ((Math.abs(diff) / previous) * 100).toFixed(0)
     };
   };
+
+  const getTrendIcon = (trend) => {
+    if (trend === 'up') return <TrendingUp className="w-5 h-5 text-red-500" />;
+    if (trend === 'down') return <TrendingDown className="w-5 h-5 text-blue-500" />;
+    return <Minus className="w-5 h-5 text-gray-500" />;
+  };
+
+  const getTrendColor = (trend) => {
+    if (trend === 'up') return 'text-red-600 bg-red-50';
+    if (trend === 'down') return 'text-blue-600 bg-blue-50';
+    return 'text-gray-600 bg-gray-50';
+  };
+
+  if (!weatherData) return null;
 
   if (!comparison) {
     return (
@@ -68,18 +81,6 @@ const WeatherComparison = ({ weatherData }) => {
       unit: ' km/h'
     }
   ];
-
-  const getTrendIcon = (trend) => {
-    if (trend === 'up') return <TrendingUp className="w-5 h-5 text-red-500" />;
-    if (trend === 'down') return <TrendingDown className="w-5 h-5 text-blue-500" />;
-    return <Minus className="w-5 h-5 text-gray-500" />;
-  };
-
-  const getTrendColor = (trend) => {
-    if (trend === 'up') return 'text-red-600 bg-red-50';
-    if (trend === 'down') return 'text-blue-600 bg-blue-50';
-    return 'text-gray-600 bg-gray-50';
-  };
 
   return (
     <div className="card mb-6">
